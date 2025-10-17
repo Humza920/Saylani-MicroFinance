@@ -85,3 +85,22 @@ exports.login = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
+exports.logout = async (req, res) => {
+  try {
+    res.clearCookie("token", { httpOnly: true, secure: process.env.NODE_ENV === "production" })
+    res.send("logout successful")
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+}
+
+exports.getMe = async (req , res) => {
+  try {
+    const user_id = req.user._id
+    const user = await User.findById(user_id).select("-password")
+    res.json({ success: true, user });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message })
+  }
+}
