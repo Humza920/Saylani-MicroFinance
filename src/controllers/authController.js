@@ -1,14 +1,15 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const validator = require("validator");
-const generateToken = require("../utils/generateToken");
+const generateToken = require("../utils/generatetoken");
 
 exports.register = async (req, res) => {
-  const { username, email, password, role } = req.body;
-
+  const {username, email, password, role ,cnic} = req.body;
+  console.log(username);
+  
   try {
-    if (!username || !email || !password || !role) {
-      return res.status(400).json({ success: false, message: "Fill all fields (including role)" });
+    if (!username || !email || !password || !role || !cnic) {
+      return res.status(400).json({ success: false, message: "Fill all fields (including role & cnic)" });
     }
 
     if (!validator.isEmail(email)) {
@@ -33,6 +34,7 @@ exports.register = async (req, res) => {
       email,
       password: hashedPassword,
       role,
+      cnic
     });
 
     const token = await generateToken(user._id);

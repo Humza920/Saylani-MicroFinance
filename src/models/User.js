@@ -14,6 +14,11 @@ const userSchema = new mongoose.Schema(
       unique: true,
       trim: true,
     },
+    cnic:{
+      type: Number,
+      required:[true , "CNIC is required"],
+      unique: true
+    },
     password: {
       type: String,
       required: [true, "Password is required"],
@@ -30,4 +35,6 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
+
+module.exports = User
