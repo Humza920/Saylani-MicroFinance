@@ -4,11 +4,11 @@ const validator = require("validator");
 const generateToken = require("../utils/generatetoken");
 
 exports.register = async (req, res) => {
-  const {username, email, password, role ,cnic} = req.body;
+  const {username, email, password ,cnic} = req.body;
   console.log(username);
   
   try {
-    if (!username || !email || !password || !role || !cnic) {
+    if (!username || !email || !password  || !cnic) {
       return res.status(400).json({ success: false, message: "Fill all fields (including role & cnic)" });
     }
 
