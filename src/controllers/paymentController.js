@@ -9,9 +9,17 @@ exports.makePayment = async (req, res) => {
         const loan = await Loan.findById(loanId);
         if (!loan) return res.status(404).json({ message: "Loan not found" });
 
+        if (loan.paymentStatus === "FulFilled" && loan.status === "Completed") {
+            return res.status(400).json({
+                message: "Loan already fully paid. No further payments allowed."
+            });
+        }
+
         if (loan.status !== "Approved" && loan.status !== "InProgress") {
             return res.status(400).json({ message: "Loan not approved yet" });
         }
+
+
 
         // Create payment
         const payment = await Payment.create({
