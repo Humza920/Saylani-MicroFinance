@@ -17,14 +17,19 @@ const loanSchema = new mongoose.Schema({
     enum: ["Pending", "Approved", "Rejected", "Completed"],
     default: "Pending",
   },
-  emiAmount: { type: Number , required:true},
+  emiAmount: { type: Number, required: true },
   totalPaid: { type: Number, default: 0 }, // Total paid so far
   remainingAmount: { type: Number, },       // Remaining balance
   appliedAt: { type: Date, default: Date.now },
+  paymentStatus: {
+    type: String,
+    enum: ["InProgress", "FulFilled",""],
+    default: ""
+  }
 });
 
 // Pre-save hook to initialize remainingAmount
-loanSchema.pre("save", function(next) {
+loanSchema.pre("save", function (next) {
   if (this.isNew) {
     this.remainingAmount = this.amount;
   }

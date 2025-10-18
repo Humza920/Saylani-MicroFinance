@@ -3,6 +3,7 @@ const cors = require("cors")
 const cookieParser = require("cookie-parser")
 const authRouter = require("./routes/authRoutes")
 const loanRouter = require("./routes/loanRoutes")
+const paymentRouter = require("./routes/paymentRoutes")
 const app = express()
 app.use(express.json())
 app.use(cors({
@@ -12,4 +13,6 @@ app.use(cors({
 app.use(cookieParser())
 app.use("/api/auth" , authRouter)
 app.use("/api/loan" , loanRouter)
+app.use("/api/payloan" , paymentRouter)
+
 module.exports = app

@@ -3,7 +3,7 @@ const User = require("../models/User")
 
 exports.applyLoan = async (req, res) => {
     const userId = req.user._id
-    const { category, subCategory, amount, durationMonths, cnic, email, emiAmount } = req.body;
+    const { category, subCategory, amount, durationMonths, cnic, email, emiAmount , paymentStatus} = req.body;
 
     try {
         if (!category || !subCategory || !amount || !durationMonths || !cnic || !email || !emiAmount) {
@@ -23,6 +23,7 @@ exports.applyLoan = async (req, res) => {
             amount,
             durationMonths,
             cnic,
+            paymentStatus,
             email,
             emiAmount
         });
