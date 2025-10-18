@@ -11,11 +11,14 @@ app.use(cors({
     credentials:true
 }))
 app.use(cookieParser())
-app.get("/", (req, res) => {
-  res.send("Backend is live ✅");
-});
 app.use("/api/auth" , authRouter)
 app.use("/api/loan" , loanRouter)
 app.use("/api/payloan" , paymentRouter)
+app.use("/admin",(req , res)=>{
+    res.send("EVERYTHING IS WORKING GOOD")
+})
+app.get("/", (req, res) => {
+  res.send("Backend is live ✅");
+});
 
 module.exports = app
